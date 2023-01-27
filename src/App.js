@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Button from './components/UI/Button/Button';
 import DemoOutput from './components/UI/Button/Demo/DemoOutput';
@@ -9,10 +9,12 @@ function App() {
 
   console.log('APP RUNNING');
 
-  const toggleParagraphHandler = () => {
+  // func will be the same in memory cause of useCallback
+  // The memoized version of the function will only change if one of the dependencies has changed.
+  const toggleParagraphHandler = useCallback(() => {
     // set the state to the opposite value of the prevState
     setShowParagraph((prevShowParagraph) => !prevShowParagraph);
-  };
+  }, []);
 
   // even though there's no prop changing in the child components they're still re-executed like function calls
   return (
