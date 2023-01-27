@@ -5,6 +5,7 @@ import DemoOutput from './components/UI/Button/Demo/DemoOutput';
 import './App.css';
 
 function App() {
+  //states are only initiallized with default values when a component is mounted / created for first time
   const [showParagraph, setShowParagraph] = useState(false);
   const [allowToggle, setAllowToggle] = useState(false);
 
@@ -15,6 +16,9 @@ function App() {
   const toggleParagraphHandler = useCallback(() => {
     // values that come from outside the function should be set as a dependency
     if (allowToggle) {
+      // doesn't give latest state from when the component was rendered (gives latest state which is schedualed)
+      // prevShowParagraph points to prev snapshot of the state
+      // if 2 state changes in 1 sychronous code then, the states will be batched, meaning that 1 scheduled state change will happen which will make 2 state changes, thus only 1 re-execution of component is needed
       setShowParagraph((prevShowParagraph) => !prevShowParagraph); // set the state to the opposite value of the prevState
     }
   }, [allowToggle]);
