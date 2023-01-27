@@ -7,4 +7,6 @@ const DemoOutput = (props) => {
   return <MyParagraph>{props.show ? 'This is new!' : ''}</MyParagraph>;
 };
 
-export default DemoOutput;
+// component only re-executes when the props change compared to previous props
+// has a cost of comparing props, good for large component tree
+export default React.memo(DemoOutput);
